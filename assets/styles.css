@@ -1513,41 +1513,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   box-shadow:var(--shadow-sm);
 }
 
-/* ---- 2. top chrome goes light ------------------------------------------ */
-.demobar{
-  background:var(--sand-pale);
-  color:#7A5326;
-  border-bottom:1px solid #F0E2CE;
-}
-.demobar b{color:var(--sand-dk)}
-
-.reqbar{
-  background:#fff;
-  border-top:0;
-  border-bottom:1px solid var(--line);
-}
-.reqbar-t b{color:var(--deep)}
-.reqbar-t span{color:var(--slate)}
-.reqbar-form input{
-  background:#fff;border:1.5px solid var(--line);color:var(--ink);
-}
-.reqbar-form input::placeholder{color:#9DB0B6}
-.reqbar-form input:focus{border-color:var(--teal);background:#fff}
-.reqbar-live{
-  background:rgba(22,163,74,.09);border:1px solid rgba(22,163,74,.28);color:var(--slate);
-}
-.reqbar-live b{color:#15803D}
-.reqbar-ok{color:#15803D}
-
-.socials{background:var(--seaglass);border-bottom:1px solid var(--line)}
-.socials-l{color:var(--slate)}
-.socials-l b{color:var(--deep)}
-.soc{
-  background:#fff;border:1px solid var(--line);color:var(--slate);
-}
-.soc:hover{background:var(--teal-xlt);color:var(--teal);border-color:rgba(34,119,145,.35)}
-.soc i{background:var(--teal-xlt);color:var(--teal)}
-
 /* ---- 3. the hero, rebuilt light ---------------------------------------- */
 .hero-bg{background-position:center 58%}
 .hero-veil{
@@ -1662,3 +1627,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   padding-right:40px;
   appearance:none;
 }
+
+/* Let the Carlsbad coastline read: a lighter flat wash so the photograph is
+   clearly visible while the deep-teal type stays well above contrast minimums. */
+.hero-veil{background:rgba(255,252,247,.74)}
+@media (max-width:1080px){ .hero-veil{background:rgba(255,252,247,.84)} }
