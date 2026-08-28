@@ -1411,6 +1411,42 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   background:rgba(230,154,96,.28);border-radius:3px;z-index:-1;
 }
 
+/* ==========================================================================
+   Hero photograph
+   To swap the image, change the url() below. The gradient underneath is the
+   fallback, so the hero still reads correctly if the photo ever fails.
+   ========================================================================== */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-color:var(--deep);
+  background-image:url("https://vibe.filesafe.space/1778084840736237174/assets/378580fb-d0a7-4ec6-8a10-cc7ff3fb08ae.png");
+  background-size:cover;
+  background-position:center 62%;
+  background-repeat:no-repeat;
+}
+/* Legibility veil: heavy behind the copy, clearing toward the photo's sky. */
+.hero-veil{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(100deg,
+      rgba(6,22,28,.94) 0%,
+      rgba(8,30,38,.88) 30%,
+      rgba(11,44,55,.66) 55%,
+      rgba(13,52,64,.42) 78%,
+      rgba(15,58,70,.34) 100%),
+    linear-gradient(180deg, rgba(6,22,28,.55) 0%, rgba(6,22,28,0) 26%),
+    linear-gradient(0deg, rgba(6,22,28,.62) 0%, rgba(6,22,28,0) 30%);
+}
+@media (max-width:1080px){
+  /* single column: copy sits over the whole width, so veil evenly */
+  .hero-veil{
+    background:
+      linear-gradient(180deg, rgba(6,22,28,.90) 0%, rgba(8,30,38,.80) 45%, rgba(11,44,55,.78) 100%),
+      linear-gradient(0deg, rgba(6,22,28,.6) 0%, rgba(6,22,28,0) 30%);
+  }
+  .hero-bg{background-position:center 55%}
+}
+
 /* single-file router */
 .pagepanel{display:none}
 .pagepanel.is-current{display:block}
@@ -1506,43 +1542,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <!-- ══ 1. hero ═══════════════════════════════════════════════════════════ -->
 <section class="hero" id="top">
-  <div class="hero-bg">
-    <svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0A2530"/><stop offset="52%" stop-color="#14485A"/><stop offset="100%" stop-color="#227791"/>
-        </linearGradient>
-        <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#E69A60" stop-opacity=".55"/><stop offset="100%" stop-color="#E69A60" stop-opacity="0"/>
-        </linearGradient>
-        <linearGradient id="w1" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#2E8AA6"/><stop offset="100%" stop-color="#1A5D74"/>
-        </linearGradient>
-      </defs>
-      <rect width="1440" height="760" fill="url(#sky)"/>
-      <circle cx="1120" cy="330" r="230" fill="url(#sun)"/>
-      <circle cx="1120" cy="330" r="66" fill="#F0B078" opacity=".5"/>
-      <path d="M0 470 Q170 424 330 452 T660 440 T980 462 T1440 436 L1440 760 L0 760Z" fill="#0D3644" opacity=".85"/>
-      <path d="M0 522 Q240 494 480 520 T960 516 T1440 500 L1440 760 L0 760Z" fill="url(#w1)" opacity=".65"/>
-      <path d="M0 586 Q300 556 600 584 T1200 580 T1440 566 L1440 760 L0 760Z" fill="#0F333E" opacity=".8"/>
-      <g stroke="#BFE3EE" stroke-width="2" opacity=".2" fill="none">
-        <path d="M120 556 q60 -12 120 0 t120 0"/>
-        <path d="M700 546 q60 -12 120 0 t120 0"/>
-        <path d="M1080 570 q60 -12 120 0 t120 0"/>
-      </g>
-      <g fill="#082129" opacity=".9">
-        <path d="M60 640 h130 v-58 l65 -42 l65 42 v58 h120 v120 H60Z"/>
-        <path d="M470 662 h96 v-46 l48 -32 l48 32 v46 h84 v98 H470Z"/>
-        <path d="M1180 650 h110 v-52 l58 -38 l58 38 v52 h34 v110 h-260Z"/>
-      </g>
-      <g stroke="#082129" stroke-width="7" fill="none" stroke-linecap="round" opacity=".92">
-        <path d="M400 760 q-8 -70 4 -118"/>
-        <path d="M404 642 q-40 -22 -66 -8M404 642 q-16 -42 -50 -50M404 642 q28 -38 66 -32M404 642 q40 -14 56 12"/>
-        <path d="M1108 760 q-6 -58 3 -98"/>
-        <path d="M1111 662 q-34 -18 -56 -6M1111 662 q-14 -36 -44 -42M1111 662 q24 -32 56 -27"/>
-      </g>
-    </svg>
-  </div>
+  <div class="hero-bg" role="img" aria-label="Coastal North County San Diego at sunset"></div>
   <div class="hero-veil"></div>
 
   <div class="wrap">
@@ -1608,13 +1608,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
           <span class="hcount"><b id="hNum">01</b> / 03</span>
         </div>
 
-        <div class="proof">
-          <span class="avstack" aria-hidden="true"><span>JM</span><span>RT</span><span>KD</span><span>LS</span></span>
-          <span class="proof-t">
-            <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></span><br>
-            <b>5.0 on Google</b> · Licensed #1123973 · <b>12 cities</b> across North County
-          </span>
-        </div>
       </div>
 
       <!-- hero estimate form -->
@@ -1748,6 +1741,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </div>
   </div>
 </section>
+
 
 
 
