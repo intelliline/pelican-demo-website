@@ -1437,67 +1437,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 }
 
 /* ==========================================================================
-   Carlsbad beach treatment
-   Warmer, sun-bleached surfaces and a wave break between light sections.
-   Purely presentational — no markup or behaviour changes.
-   ========================================================================== */
-:root{
-  --sand-pale:#FBF6EE;   /* dry sand   */
-  --seaglass:#F1F7F6;    /* sea glass  */
-  --foam:#FDFBF8;        /* wet foam   */
-}
-
-/* alternating sections drift from warm sand down into sea glass */
-.section--alt{
-  background:linear-gradient(180deg,var(--sand-pale) 0%,var(--seaglass) 100%);
-  position:relative;
-}
-
-/* a foam line where a light section meets a tinted one */
-.section:not(.section--deep):not(.stl):not(.section--alt) + .section--alt::before,
-.marq + .section--alt::before{
-  content:"";position:absolute;left:0;right:0;top:0;height:34px;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 34' preserveAspectRatio='none'><path d='M0 0 C 150 30, 300 2, 450 16 C 600 30, 750 4, 900 14 C 1020 22, 1120 8, 1200 0 L1200 0 L0 0Z' fill='%23ffffff'/></svg>");
-  background-size:1200px 34px;
-  background-repeat:repeat-x;
-  background-position:top center;
-}
-
-/* cards sit on warm surfaces, so lift them with foam rather than flat white */
-.section--alt .svc,
-.section--alt .rev,
-.section--alt .spec-i,
-.section--alt .plan,
-.section--alt .ccard{background:var(--foam)}
-
-/* warm the hairlines a touch so they don't read cold against sand */
-.section--alt .svc,
-.section--alt .rev,
-.section--alt .spec-i,
-.section--alt .ccard{border-color:#E9E6DF}
-
-/* hero: let a little more of the sunset through and warm the shadow */
-.hero-veil{
-  background:
-    linear-gradient(100deg,
-      rgba(8,26,32,.92) 0%,
-      rgba(12,36,44,.84) 30%,
-      rgba(18,52,62,.58) 56%,
-      rgba(30,64,68,.32) 80%,
-      rgba(46,72,70,.22) 100%),
-    linear-gradient(180deg, rgba(8,26,32,.5) 0%, rgba(8,26,32,0) 26%),
-    linear-gradient(0deg, rgba(8,26,32,.6) 0%, rgba(8,26,32,0) 30%);
-}
-
-/* the marquee is the boardwalk strip between folds — warm it to match */
-.marq{background:linear-gradient(180deg,#fff 0%,var(--sand-pale) 100%);border-bottom-color:#EDE7DD}
-.marq-i{background:var(--foam);border-color:#E9E6DF}
-
-/* welcome photograph */
-.welcome-media{background:var(--deep)}
-.welcome-media img{width:100%;height:100%;object-fit:cover;display:block}
-
-/* ==========================================================================
    LIGHT PASS
    Bright, sun-bleached treatment: light chrome, a light hero over the photo,
    lifted dark slabs, and the estimates badge moved out of the stats panel.
@@ -1515,15 +1454,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 /* ---- 3. the hero, rebuilt light ---------------------------------------- */
 .hero-bg{background-position:center 58%}
-.hero-veil{
-  background:
-    linear-gradient(96deg,
-      rgba(255,253,249,.95) 0%,
-      rgba(255,252,247,.90) 34%,
-      rgba(255,251,245,.70) 56%,
-      rgba(255,250,243,.44) 78%,
-      rgba(255,249,241,.30) 100%);
-}
 .hero .hero-h,.hero h1{color:var(--deep)}
 .hero .hero-h em,.hero h1 em{color:var(--sand-dk)}
 .hero .hero-h em::after,.hero h1 em::after{background:rgba(201,123,66,.20)}
@@ -1587,10 +1517,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .hero-timer span{color:var(--slate)}
 
 /* the wave under the hero now separates two light surfaces -- soften it */
-.hero-wave svg path{fill:var(--foam)}
+.hero-wave svg path{fill:#fff}
 
 /* ---- 4. inner-page headers go light too -------------------------------- */
-.phero{background:linear-gradient(160deg,var(--sand-pale) 0%,var(--seaglass) 62%,#E7F1F1 100%)}
 .phero-bg{display:none}
 .phero-veil{display:none}
 .phero h1{color:var(--deep)}
@@ -1603,20 +1532,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .phero .btn--ghost:hover{background:var(--teal);color:#fff}
 .phero-wave svg path{fill:#fff}
 
-/* ---- 5. lift the remaining dark slabs off near-black ------------------- */
-.section--deep{background:linear-gradient(165deg,#14495A 0%,#1B5C6E 100%)}
-.stl{background:linear-gradient(165deg,#123F4E 0%,#1A5A6C 55%,#227791 100%)}
-.eband{background:linear-gradient(120deg,#14495A,#1B5C6E 60%,#227791)}
-.ftr{background:#0E3D4B}
-.why-panel{background:linear-gradient(155deg,#164F61,#1E6478)}
-.dcard{background:linear-gradient(155deg,#164F61,#1E6478)}
-.stat{background:rgba(10,45,56,.55)}
-
 /* Flat scrim, not a gradient: one even wash so the photo reads consistently
    across the whole hero and the type sits on a predictable surface. */
-.hero-veil{background:rgba(255,252,247,.86)}
-@media (max-width:1080px){ .hero-veil{background:rgba(255,252,247,.90)} }
-.phero{background:var(--sand-pale)}
+@media (max-width:1080px){  }
 
 /* the light-pass background shorthand reset the select arrow's repeat and
    position, so it tiled -- restore the single, right-aligned chevron */
@@ -1630,13 +1548,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 /* Let the Carlsbad coastline read: a lighter flat wash so the photograph is
    clearly visible while the deep-teal type stays well above contrast minimums. */
-.hero-veil{background:rgba(255,252,247,.74)}
-@media (max-width:1080px){ .hero-veil{background:rgba(255,252,247,.84)} }
+@media (max-width:1080px){  }
 
 /* Final hero balance: the wash is light enough that the beach, surf line and
    bluff all read, and the body copy is darkened so it still clears 4.5:1 over
    the darker sand rather than only over the bright foam. */
-.hero-veil{background:rgba(255,252,247,.55)}
 .hero-bg{background-position:center 66%}
-.hero-sub{color:#2B4A53}
-@media (max-width:1080px){ .hero-veil{background:rgba(255,252,247,.68)} }
+@media (max-width:1080px){  }
+
+/* ==========================================================================
+   BRAND LOCK
+   Only Pelican's palette: deep teal #0F333E, teal #227791, sand #E69A60,
+   on white/neutral surfaces, set in Manrope. No invented tints.
+   ========================================================================== */
+
+/* alt sections return to the neutral surface, not sand */
+.section--alt{background:var(--bg-alt)}
+.section--alt .svc,
+.section--alt .rev,
+.section--alt .spec-i,
+.section--alt .plan,
+.section--alt .ccard{background:#fff;border-color:var(--line)}
+
+/* section break stays a plain white foam line */
+.marq{background:#fff;border-bottom-color:var(--line)}
+.marq-i{background:var(--bg-alt);border-color:var(--line)}
+
+/* inner-page headers: brand teal tint rather than sand */
+.phero{background:var(--teal-xlt)}
+
+/* hero wash is neutral white, and the body copy is brand deep teal */
+.hero-veil{background:rgba(255,255,255,.55)}
+@media (max-width:1080px){ .hero-veil{background:rgba(255,255,255,.68)} }
+.hero-sub{color:rgba(15,51,62,.88)}
+.hero-wave svg path{fill:#fff}
