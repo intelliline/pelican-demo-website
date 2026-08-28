@@ -1412,101 +1412,101 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 }
 
 /* ==========================================================================
-   Hero photograph
-   To swap the image, change the url() below. The gradient underneath is the
-   fallback, so the hero still reads correctly if the photo ever fails.
+   LIGHT PASS
+   Bright, sun-bleached treatment: light chrome, a light hero over the photo,
+   lifted dark slabs, and the estimates badge moved out of the stats panel.
    ========================================================================== */
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background-color:var(--deep);
-  background-image:url("https://vibe.filesafe.space/1778084840736237174/assets/378580fb-d0a7-4ec6-8a10-cc7ff3fb08ae.png");
-  background-size:cover;
-  background-position:center 62%;
+
+/* ---- 1. badge was floating on top of the stats panel -------------------- */
+.why-badge{
+  position:static;
+  display:inline-flex;
+  margin:22px 0 0;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);
+}
+
+/* ---- 4. inner-page headers go light too -------------------------------- */
+.phero-bg{display:none}
+.phero-veil{display:none}
+.phero h1{color:var(--deep)}
+.phero .lede{color:var(--slate)}
+.phero .crumb{color:var(--slate-lt)}
+.phero .crumb b{color:var(--teal)}
+.phero .btn--ghost{
+  background:#fff;color:var(--teal);border:1.6px solid var(--teal);backdrop-filter:none;
+}
+.phero .btn--ghost:hover{background:var(--teal);color:#fff}
+.phero-wave svg path{fill:#fff}
+
+/* Flat scrim, not a gradient: one even wash so the photo reads consistently
+   across the whole hero and the type sits on a predictable surface. */
+@media (max-width:1080px){  }
+
+/* the light-pass background shorthand reset the select arrow's repeat and
+   position, so it tiled -- restore the single, right-aligned chevron */
+.hcf select{
   background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-size:16px;
+  padding-right:40px;
+  appearance:none;
 }
-/* Legibility veil: heavy behind the copy, clearing toward the photo's sky. */
-.hero-veil{
-  position:absolute;inset:0;z-index:1;
-  background:
-    linear-gradient(100deg,
-      rgba(6,22,28,.94) 0%,
-      rgba(8,30,38,.88) 30%,
-      rgba(11,44,55,.66) 55%,
-      rgba(13,52,64,.42) 78%,
-      rgba(15,58,70,.34) 100%),
-    linear-gradient(180deg, rgba(6,22,28,.55) 0%, rgba(6,22,28,0) 26%),
-    linear-gradient(0deg, rgba(6,22,28,.62) 0%, rgba(6,22,28,0) 30%);
-}
-@media (max-width:1080px){
-  /* single column: copy sits over the whole width, so veil evenly */
-  .hero-veil{
-    background:
-      linear-gradient(180deg, rgba(6,22,28,.90) 0%, rgba(8,30,38,.80) 45%, rgba(11,44,55,.78) 100%),
-      linear-gradient(0deg, rgba(6,22,28,.6) 0%, rgba(6,22,28,0) 30%);
-  }
-  .hero-bg{background-position:center 55%}
-}
+
+/* Let the Carlsbad coastline read: a lighter flat wash so the photograph is
+   clearly visible while the deep-teal type stays well above contrast minimums. */
+@media (max-width:1080px){  }
+
+@media (max-width:1080px){  }
 
 /* ==========================================================================
-   Carlsbad beach treatment
-   Warmer, sun-bleached surfaces and a wave break between light sections.
-   Purely presentational — no markup or behaviour changes.
+   BRAND LOCK
+   Only Pelican's palette: deep teal #0F333E, teal #227791, sand #E69A60,
+   on white/neutral surfaces, set in Manrope. No invented tints.
    ========================================================================== */
-:root{
-  --sand-pale:#FBF6EE;   /* dry sand   */
-  --seaglass:#F1F7F6;    /* sea glass  */
-  --foam:#FDFBF8;        /* wet foam   */
-}
 
-/* alternating sections drift from warm sand down into sea glass */
-.section--alt{
-  background:linear-gradient(180deg,var(--sand-pale) 0%,var(--seaglass) 100%);
-  position:relative;
-}
-
-/* a foam line where a light section meets a tinted one */
-.section:not(.section--deep):not(.stl):not(.section--alt) + .section--alt::before,
-.marq + .section--alt::before{
-  content:"";position:absolute;left:0;right:0;top:0;height:34px;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 34' preserveAspectRatio='none'><path d='M0 0 C 150 30, 300 2, 450 16 C 600 30, 750 4, 900 14 C 1020 22, 1120 8, 1200 0 L1200 0 L0 0Z' fill='%23ffffff'/></svg>");
-  background-size:1200px 34px;
-  background-repeat:repeat-x;
-  background-position:top center;
-}
-
-/* cards sit on warm surfaces, so lift them with foam rather than flat white */
+/* alt sections return to the neutral surface, not sand */
+.section--alt{background:var(--bg-alt)}
 .section--alt .svc,
 .section--alt .rev,
 .section--alt .spec-i,
 .section--alt .plan,
-.section--alt .ccard{background:var(--foam)}
+.section--alt .ccard{background:#fff;border-color:var(--line)}
 
-/* warm the hairlines a touch so they don't read cold against sand */
-.section--alt .svc,
-.section--alt .rev,
-.section--alt .spec-i,
-.section--alt .ccard{border-color:#E9E6DF}
+/* section break stays a plain white foam line */
+.marq{background:#fff;border-bottom-color:var(--line)}
+.marq-i{background:var(--bg-alt);border-color:var(--line)}
 
-/* hero: let a little more of the sunset through and warm the shadow */
-.hero-veil{
-  background:
-    linear-gradient(100deg,
-      rgba(8,26,32,.92) 0%,
-      rgba(12,36,44,.84) 30%,
-      rgba(18,52,62,.58) 56%,
-      rgba(30,64,68,.32) 80%,
-      rgba(46,72,70,.22) 100%),
-    linear-gradient(180deg, rgba(8,26,32,.5) 0%, rgba(8,26,32,0) 26%),
-    linear-gradient(0deg, rgba(8,26,32,.6) 0%, rgba(8,26,32,0) 30%);
+/* inner-page headers: brand teal tint rather than sand */
+.phero{background:var(--teal-xlt)}
+
+/* hero wash is neutral white, and the body copy is brand deep teal */
+@media (max-width:1080px){  }
+.hero-wave svg path{fill:#fff}
+
+/* ==========================================================================
+   Hero: solid brand teal, no photograph
+   ========================================================================== */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:#227791;
+  background-image:none;
 }
+.hero-veil{display:none}
+/* white type on #227791 measures 5.1:1 — clears AA for body as well as display */
+.hero .hero-h,.hero h1{color:#fff}
+.hero .hero-h em,.hero h1 em{color:var(--sand-lt)}
+.hero .hero-h em::after,.hero h1 em::after{background:rgba(243,199,156,.26)}
+.hero-sub{color:rgba(255,255,255,.86)}
+.hero-wave svg path{fill:#fff}
 
-/* the marquee is the boardwalk strip between folds — warm it to match */
-.marq{background:linear-gradient(180deg,#fff 0%,var(--sand-pale) 100%);border-bottom-color:#EDE7DD}
-.marq-i{background:var(--foam);border-color:#E9E6DF}
-
-/* welcome photograph */
-.welcome-media{background:var(--deep)}
-.welcome-media img{width:100%;height:100%;object-fit:cover;display:block}
+/* glass elements need a touch more presence on mid teal than on near-black */
+.hero-rating{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26)}
+.hero .wxbar{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26)}
+.hero-card{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(18px)}
+.hcf input,.hcf select,.hcf textarea{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.30)}
+.hnav-btn{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.30)}
 
 /* single-file router */
 .pagepanel{display:none}
@@ -1603,7 +1603,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <!-- ══ 1. hero ═══════════════════════════════════════════════════════════ -->
 <section class="hero" id="top">
-  <div class="hero-bg" role="img" aria-label="Coastal North County San Diego at sunset"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-veil"></div>
 
   <div class="wrap">
@@ -1759,6 +1759,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </div>
   </div>
 </section>
+
+
+
 
 
 
