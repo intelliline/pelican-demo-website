@@ -1435,3 +1435,64 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   }
   .hero-bg{background-position:center 55%}
 }
+
+/* ==========================================================================
+   Carlsbad beach treatment
+   Warmer, sun-bleached surfaces and a wave break between light sections.
+   Purely presentational — no markup or behaviour changes.
+   ========================================================================== */
+:root{
+  --sand-pale:#FBF6EE;   /* dry sand   */
+  --seaglass:#F1F7F6;    /* sea glass  */
+  --foam:#FDFBF8;        /* wet foam   */
+}
+
+/* alternating sections drift from warm sand down into sea glass */
+.section--alt{
+  background:linear-gradient(180deg,var(--sand-pale) 0%,var(--seaglass) 100%);
+  position:relative;
+}
+
+/* a foam line where a light section meets a tinted one */
+.section:not(.section--deep):not(.stl):not(.section--alt) + .section--alt::before,
+.marq + .section--alt::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:34px;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 34' preserveAspectRatio='none'><path d='M0 0 C 150 30, 300 2, 450 16 C 600 30, 750 4, 900 14 C 1020 22, 1120 8, 1200 0 L1200 0 L0 0Z' fill='%23ffffff'/></svg>");
+  background-size:1200px 34px;
+  background-repeat:repeat-x;
+  background-position:top center;
+}
+
+/* cards sit on warm surfaces, so lift them with foam rather than flat white */
+.section--alt .svc,
+.section--alt .rev,
+.section--alt .spec-i,
+.section--alt .plan,
+.section--alt .ccard{background:var(--foam)}
+
+/* warm the hairlines a touch so they don't read cold against sand */
+.section--alt .svc,
+.section--alt .rev,
+.section--alt .spec-i,
+.section--alt .ccard{border-color:#E9E6DF}
+
+/* hero: let a little more of the sunset through and warm the shadow */
+.hero-veil{
+  background:
+    linear-gradient(100deg,
+      rgba(8,26,32,.92) 0%,
+      rgba(12,36,44,.84) 30%,
+      rgba(18,52,62,.58) 56%,
+      rgba(30,64,68,.32) 80%,
+      rgba(46,72,70,.22) 100%),
+    linear-gradient(180deg, rgba(8,26,32,.5) 0%, rgba(8,26,32,0) 26%),
+    linear-gradient(0deg, rgba(8,26,32,.6) 0%, rgba(8,26,32,0) 30%);
+}
+
+/* the marquee is the boardwalk strip between folds — warm it to match */
+.marq{background:linear-gradient(180deg,#fff 0%,var(--sand-pale) 100%);border-bottom-color:#EDE7DD}
+.marq-i{background:var(--foam);border-color:#E9E6DF}
+
+/* welcome photograph */
+.welcome-media{background:var(--deep)}
+.welcome-media img{width:100%;height:100%;object-fit:cover;display:block}
