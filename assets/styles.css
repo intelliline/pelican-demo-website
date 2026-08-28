@@ -1264,3 +1264,50 @@ a.svc-link{cursor:pointer}
   .ftr-brand{gap:14px}
 }
 .nav a{white-space:nowrap}
+
+
+/* ==========================================================================
+   Live Carlsbad weather panel
+   ========================================================================== */
+.wx-main{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:6px 4px 18px}
+.wx-now{min-width:0}
+.wx-temp{display:flex;align-items:flex-start;gap:4px;line-height:1}
+.wx-temp b{
+  font-size:4.4rem;font-weight:800;color:#fff;letter-spacing:-.055em;line-height:.9;
+  font-variant-numeric:tabular-nums;
+}
+.wx-temp span{font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.55);margin-top:4px}
+.wx-cond{font-size:1.02rem;font-weight:800;color:var(--sand);letter-spacing:-.02em;margin-top:8px}
+.wx-feels{font-size:.87rem;font-weight:600;color:rgba(255,255,255,.6);margin-top:4px}
+.wx-feels b{color:rgba(255,255,255,.9);font-weight:800}
+.wx-icon{width:92px;height:92px;flex:none;opacity:.95}
+.wx-icon svg{width:100%;height:100%}
+
+.wx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.12);border-radius:14px;overflow:hidden}
+.wx-cell{background:rgba(10,37,46,.86);padding:14px 12px;text-align:center}
+.wx-k{
+  display:block;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-bottom:7px;
+}
+.wx-cell b{font-size:1.12rem;font-weight:800;color:#fff;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+
+.wx-load{margin-top:14px;padding:15px 16px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13)}
+.wx-load-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px}
+.wx-load-h b{font-size:.95rem;font-weight:800;color:var(--sand);letter-spacing:-.02em}
+.wx-load-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
+.wx-load-bar i{
+  display:block;height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--teal-lt),var(--sand));
+  transition:width 1.1s var(--ease);
+}
+.wx-load-p{margin:9px 0 0;font-size:.73rem;color:rgba(255,255,255,.45);font-weight:600;line-height:1.4}
+
+.livep-badge.is-snap{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.livep-badge.is-snap .pulse-dot{background:rgba(255,255,255,.4);animation:none;box-shadow:none}
+
+@media (max-width:640px){
+  .wx-temp b{font-size:3.5rem}
+  .wx-icon{width:72px;height:72px}
+  .wx-grid{grid-template-columns:1fr 1fr}
+}

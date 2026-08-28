@@ -350,37 +350,91 @@
     restartAuto();
   }
 
-  /* ---------- live system panel -------------------------------------------- */
-  var zones = $$('.zone');
-  if (zones.length) {
-    var base = [72, 75, 71, 84];
-    var stamp = function () {
-      var d = new Date();
-      return [d.getHours(), d.getMinutes(), d.getSeconds()]
-        .map(function (n) { return String(n).padStart(2, '0'); }).join(':');
+  /* ---------- live Carlsbad weather ---------------------------------------- */
+  var wx = $('#wx');
+  if (wx) {
+    var WMO = {
+      0:['Clear sky','sun'], 1:['Mainly clear','sun'], 2:['Partly cloudy','partly'],
+      3:['Overcast','cloud'], 45:['Fog','fog'], 48:['Freezing fog','fog'],
+      51:['Light drizzle','rain'], 53:['Drizzle','rain'], 55:['Heavy drizzle','rain'],
+      56:['Freezing drizzle','rain'], 57:['Freezing drizzle','rain'],
+      61:['Light rain','rain'], 63:['Rain','rain'], 65:['Heavy rain','rain'],
+      66:['Freezing rain','rain'], 67:['Freezing rain','rain'],
+      71:['Light snow','snow'], 73:['Snow','snow'], 75:['Heavy snow','snow'], 77:['Snow grains','snow'],
+      80:['Light showers','rain'], 81:['Showers','rain'], 82:['Heavy showers','rain'],
+      85:['Snow showers','snow'], 86:['Snow showers','snow'],
+      95:['Thunderstorm','storm'], 96:['Thunderstorm','storm'], 99:['Thunderstorm','storm']
     };
-    var tickPanel = function () {
-      zones.forEach(function (z, i) {
-        var t = $('[data-temp]', z), tm = $('[data-time]', z);
-        if (tm) tm.textContent = stamp();
-        if (t && !reduce && Math.random() > 0.55) {
-          var drift = base[i] + (Math.random() < 0.5 ? 0 : 1) - (Math.random() < 0.25 ? 1 : 0);
-          t.textContent = drift;
-        }
-      });
-    };
-    tickPanel();
-    setInterval(tickPanel, 2000);
 
-    var fl = $('#filterLife');
-    if (fl) {
-      var flv = 62;
-      setInterval(function () {
-        if (reduce) return;
-        flv = flv <= 58 ? 62 : flv - 1;
-        fl.textContent = flv + '%';
-      }, 9000);
-    }
+    var ART = {
+      sun:'<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="13" fill="#F0B078"/><g stroke="#E69A60" stroke-width="3.4" stroke-linecap="round"><path d="M32 6v7M32 51v7M6 32h7M51 32h7M13.6 13.6l5 5M45.4 45.4l5 5M50.4 13.6l-5 5M18.6 45.4l-5 5"/></g></svg>',
+      partly:'<svg viewBox="0 0 64 64" fill="none"><circle cx="25" cy="24" r="10" fill="#F0B078"/><g stroke="#E69A60" stroke-width="3" stroke-linecap="round"><path d="M25 4v5M25 39v3M5 24h5M8.9 9.9l3.5 3.5M41.1 9.9l-3.5 3.5"/></g><path d="M22 46a9 9 0 0 1 8.9-9 12 12 0 0 1 22.6 4.3A7.5 7.5 0 0 1 52 53H30a8 8 0 0 1-8-7z" fill="#BFE3EE" opacity=".92"/></svg>',
+      cloud:'<svg viewBox="0 0 64 64" fill="none"><path d="M16 44a10 10 0 0 1 9.9-10 13 13 0 0 1 25 4.8A8.4 8.4 0 0 1 49 52H25a9 9 0 0 1-9-8z" fill="#BFE3EE" opacity=".9"/><path d="M26 26a11 11 0 0 1 19-4" stroke="#7FC5D8" stroke-width="3" stroke-linecap="round" opacity=".7"/></svg>',
+      fog:'<svg viewBox="0 0 64 64" fill="none"><path d="M16 36a10 10 0 0 1 9.9-10 13 13 0 0 1 25 4.8A8.4 8.4 0 0 1 49 44H25a9 9 0 0 1-9-8z" fill="#BFE3EE" opacity=".85"/><g stroke="#7FC5D8" stroke-width="3.2" stroke-linecap="round" opacity=".75"><path d="M14 51h36M20 58h26"/></g></svg>',
+      rain:'<svg viewBox="0 0 64 64" fill="none"><path d="M16 34a10 10 0 0 1 9.9-10 13 13 0 0 1 25 4.8A8.4 8.4 0 0 1 49 42H25a9 9 0 0 1-9-8z" fill="#BFE3EE" opacity=".9"/><g stroke="#3E9DBA" stroke-width="3.4" stroke-linecap="round"><path d="M24 48l-3 8M35 48l-3 8M46 48l-3 8"/></g></svg>',
+      snow:'<svg viewBox="0 0 64 64" fill="none"><path d="M16 34a10 10 0 0 1 9.9-10 13 13 0 0 1 25 4.8A8.4 8.4 0 0 1 49 42H25a9 9 0 0 1-9-8z" fill="#BFE3EE" opacity=".9"/><g stroke="#7FC5D8" stroke-width="3" stroke-linecap="round"><path d="M23 50v7M19.5 51.8l7 3.4M26.5 51.8l-7 3.4M41 50v7M37.5 51.8l7 3.4M44.5 51.8l-7 3.4"/></g></svg>',
+      storm:'<svg viewBox="0 0 64 64" fill="none"><path d="M16 32a10 10 0 0 1 9.9-10 13 13 0 0 1 25 4.8A8.4 8.4 0 0 1 49 40H25a9 9 0 0 1-9-8z" fill="#BFE3EE" opacity=".9"/><path d="M34 42l-9 12h7l-3 10 11-14h-7z" fill="#E69A60"/></svg>'
+    };
+
+    var setBadge = function (live) {
+      var b = $('#wxBadge'), t = $('#wxBadgeT');
+      if (!b || !t) return;
+      b.classList.toggle('is-snap', !live);
+      t.textContent = live ? 'LIVE' : 'SNAPSHOT';
+    };
+
+    /* cooling demand: driven by temperature, nudged by humidity */
+    var demand = function (tempF, hum) {
+      var score = (tempF - 62) * 3.2 + (hum - 45) * 0.35;
+      score = Math.max(4, Math.min(100, Math.round(score)));
+      var label = score < 25 ? 'Low' : score < 50 ? 'Moderate' : score < 75 ? 'High' : 'Very high';
+      return { score: score, label: label };
+    };
+
+    var paint = function (c, daily) {
+      var code = WMO[c.weather_code] || ['—', 'cloud'];
+      $('#wxTemp').textContent = Math.round(c.temperature_2m);
+      $('#wxCond').textContent = code[0];
+      $('#wxFeels').innerHTML = Math.round(c.apparent_temperature) + '&deg;';
+      $('#wxHum').textContent = Math.round(c.relative_humidity_2m) + '%';
+      $('#wxWind').textContent = Math.round(c.wind_speed_10m) + ' mph';
+      $('#wxIcon').innerHTML = ART[code[1]] || ART.cloud;
+      if (daily) {
+        $('#wxHigh').innerHTML = Math.round(daily.temperature_2m_max[0]) + '&deg;';
+        $('#wxLow').innerHTML = Math.round(daily.temperature_2m_min[0]) + '&deg;';
+      }
+      var d = demand(c.temperature_2m, c.relative_humidity_2m);
+      $('#wxLoadT').textContent = d.label;
+      $('#wxLoadBar').style.width = d.score + '%';
+      var t = new Date();
+      $('#wxTime').textContent = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    };
+
+    var load = function () {
+      var url = 'https://api.open-meteo.com/v1/forecast'
+        + '?latitude=33.1581&longitude=-117.3506'
+        + '&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m'
+        + '&daily=temperature_2m_max,temperature_2m_min'
+        + '&temperature_unit=fahrenheit&wind_speed_unit=mph'
+        + '&timezone=America%2FLos_Angeles&forecast_days=1';
+      fetch(url)
+        .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+        .then(function (j) {
+          if (!j || !j.current) throw new Error('bad payload');
+          paint(j.current, j.daily);
+          setBadge(true);
+        })
+        .catch(function () {
+          /* offline, blocked, or rate-limited -- keep the seeded numbers,
+             but never claim they are live */
+          setBadge(false);
+          $('#wxIcon').innerHTML = ART.cloud;
+        });
+    };
+
+    setBadge(false);
+    load();
+    setInterval(load, 10 * 60 * 1000);
   }
 
   /* ---------- avg response ticker ------------------------------------------ */
