@@ -1632,3 +1632,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    clearly visible while the deep-teal type stays well above contrast minimums. */
 .hero-veil{background:rgba(255,252,247,.74)}
 @media (max-width:1080px){ .hero-veil{background:rgba(255,252,247,.84)} }
+
+/* Final hero balance: the wash is light enough that the beach, surf line and
+   bluff all read, and the body copy is darkened so it still clears 4.5:1 over
+   the darker sand rather than only over the bright foam. */
+.hero-veil{background:rgba(255,252,247,.55)}
+.hero-bg{background-position:center 66%}
+.hero-sub{color:#2B4A53}
+@media (max-width:1080px){ .hero-veil{background:rgba(255,252,247,.68)} }
