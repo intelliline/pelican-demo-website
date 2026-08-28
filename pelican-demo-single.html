@@ -1447,6 +1447,67 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .hero-bg{background-position:center 55%}
 }
 
+/* ==========================================================================
+   Carlsbad beach treatment
+   Warmer, sun-bleached surfaces and a wave break between light sections.
+   Purely presentational — no markup or behaviour changes.
+   ========================================================================== */
+:root{
+  --sand-pale:#FBF6EE;   /* dry sand   */
+  --seaglass:#F1F7F6;    /* sea glass  */
+  --foam:#FDFBF8;        /* wet foam   */
+}
+
+/* alternating sections drift from warm sand down into sea glass */
+.section--alt{
+  background:linear-gradient(180deg,var(--sand-pale) 0%,var(--seaglass) 100%);
+  position:relative;
+}
+
+/* a foam line where a light section meets a tinted one */
+.section:not(.section--deep):not(.stl):not(.section--alt) + .section--alt::before,
+.marq + .section--alt::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:34px;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 34' preserveAspectRatio='none'><path d='M0 0 C 150 30, 300 2, 450 16 C 600 30, 750 4, 900 14 C 1020 22, 1120 8, 1200 0 L1200 0 L0 0Z' fill='%23ffffff'/></svg>");
+  background-size:1200px 34px;
+  background-repeat:repeat-x;
+  background-position:top center;
+}
+
+/* cards sit on warm surfaces, so lift them with foam rather than flat white */
+.section--alt .svc,
+.section--alt .rev,
+.section--alt .spec-i,
+.section--alt .plan,
+.section--alt .ccard{background:var(--foam)}
+
+/* warm the hairlines a touch so they don't read cold against sand */
+.section--alt .svc,
+.section--alt .rev,
+.section--alt .spec-i,
+.section--alt .ccard{border-color:#E9E6DF}
+
+/* hero: let a little more of the sunset through and warm the shadow */
+.hero-veil{
+  background:
+    linear-gradient(100deg,
+      rgba(8,26,32,.92) 0%,
+      rgba(12,36,44,.84) 30%,
+      rgba(18,52,62,.58) 56%,
+      rgba(30,64,68,.32) 80%,
+      rgba(46,72,70,.22) 100%),
+    linear-gradient(180deg, rgba(8,26,32,.5) 0%, rgba(8,26,32,0) 26%),
+    linear-gradient(0deg, rgba(8,26,32,.6) 0%, rgba(8,26,32,0) 30%);
+}
+
+/* the marquee is the boardwalk strip between folds — warm it to match */
+.marq{background:linear-gradient(180deg,#fff 0%,var(--sand-pale) 100%);border-bottom-color:#EDE7DD}
+.marq-i{background:var(--foam);border-color:#E9E6DF}
+
+/* welcome photograph */
+.welcome-media{background:var(--deep)}
+.welcome-media img{width:100%;height:100%;object-fit:cover;display:block}
+
 /* single-file router */
 .pagepanel{display:none}
 .pagepanel.is-current{display:block}
@@ -1666,14 +1727,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <span class="eyebrow">Welcome to Pelican</span>
         <h2>A Carlsbad company, not a franchise with a Carlsbad phone number</h2>
         <p class="lede" style="margin-bottom:20px">
-          Pelican Heating &amp; Air is locally owned and based on Acacia Avenue, a few minutes from
-          most of the homes we look after. For more than 25 years we've built this business one house
+          Pelican Heating &amp; Air is locally owned and based on Acacia Avenue in the Village, a few
+          minutes from the seawall and from most of the homes we look after. For more than 25 years we've built this business one house
           at a time — on quality work, honest advice, and the kind of personal service you don't get
           from the big national chains.
         </p>
         <p style="color:var(--slate)">
-          Heating and air conditioning isn't one of several things we do. It's the only thing we do,
-          and it has been since day one. That shows up in every install we complete and every repair
+          We know what the marine layer does to a system in Ponto, why the bluff homes above Tamarack
+          need coated coils, and how differently a house breathes in Bressi Ranch versus one three
+          blocks off the 101. Heating and air conditioning isn't one of several things we do — it's
+          the only thing we do, and it has been since day one. That shows up in every install we complete and every repair
           we make — and in the fact that we'll tell you when a repair is the smarter option, even
           when a replacement would be the bigger invoice.
         </p>
@@ -1689,58 +1752,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="welcome-media rv rv-d2">
-        <svg viewBox="0 0 480 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs>
-            <linearGradient id="wsky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0A2530"/><stop offset="62%" stop-color="#1B647C"/><stop offset="100%" stop-color="#2E8AA6"/>
-            </linearGradient>
-            <linearGradient id="wsun" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#F0B078" stop-opacity=".85"/><stop offset="100%" stop-color="#E69A60" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="wroof" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0E3241"/><stop offset="100%" stop-color="#061B22"/>
-            </linearGradient>
-          </defs>
-          <rect width="480" height="360" fill="url(#wsky)"/>
-          <circle cx="360" cy="120" r="130" fill="url(#wsun)" opacity=".5"/>
-          <circle cx="360" cy="118" r="40" fill="#F5C193" opacity=".75"/>
-          <path d="M0 208 Q120 190 240 206 T480 196 L480 360 L0 360Z" fill="#0F333E" opacity=".55"/>
-          <path d="M0 240 Q140 224 280 242 T480 232 L480 360 L0 360Z" fill="#082129" opacity=".75"/>
-          <!-- house -->
-          <path d="M96 300 v-84 l84 -56 l84 56 v84 z" fill="url(#wroof)"/>
-          <path d="M78 220 l102 -70 l102 70" fill="none" stroke="#227791" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
-          <rect x="128" y="238" width="42" height="34" rx="3" fill="#3E9DBA" opacity=".55"/>
-          <rect x="192" y="238" width="42" height="34" rx="3" fill="#3E9DBA" opacity=".35"/>
-          <rect x="160" y="272" width="34" height="28" rx="2" fill="#E69A60" opacity=".85"/>
-          <!-- condenser unit -->
-          <rect x="300" y="248" width="86" height="66" rx="8" fill="#0E3241" stroke="#3E9DBA" stroke-width="2.5"/>
-          <circle cx="343" cy="281" r="22" fill="none" stroke="#7FC5D8" stroke-width="2.5" opacity=".8"/>
-          <g stroke="#E69A60" stroke-width="3" stroke-linecap="round" opacity=".95">
-            <path d="M343 281 l0 -16M343 281 l14 8M343 281 l-14 8"/>
-          </g>
-          <circle cx="343" cy="281" r="4" fill="#E69A60"/>
-          <path d="M300 262 h86M300 300 h86" stroke="#1B4E5F" stroke-width="2"/>
-          <!-- cool air -->
-          <g stroke="#BFE3EE" stroke-width="3" stroke-linecap="round" fill="none" opacity=".45">
-            <path d="M398 262 q14 -8 28 0"/>
-            <path d="M398 281 q14 -8 28 0"/>
-            <path d="M398 300 q14 -8 28 0"/>
-          </g>
-          <!-- palm -->
-          <g stroke="#061B22" stroke-width="8" fill="none" stroke-linecap="round">
-            <path d="M60 360 q-10 -78 4 -128"/>
-            <path d="M64 232 q-38 -22 -62 -8M64 232 q-16 -40 -46 -48M64 232 q30 -36 66 -28M64 232 q40 -12 54 14"/>
-          </g>
-          <!-- birds -->
-          <g stroke="#DCEEF3" stroke-width="2.2" fill="none" opacity=".45" stroke-linecap="round">
-            <path d="M180 96 q10 -8 20 0M200 96 q10 -8 20 0"/>
-            <path d="M240 62 q8 -6 16 0M256 62 q8 -6 16 0"/>
-          </g>
-        </svg>
+        <img src="https://vibe.filesafe.space/1778084840736237174/attachments/4fc83a0a-0cb3-44a1-a29e-df99af67f246.png"
+             alt="A bluff-top home above the sand on the Carlsbad coast at sunset"
+             loading="lazy" decoding="async">
       </div>
     </div>
   </div>
 </section>
+
 
 
 
@@ -3100,7 +3119,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
               <div class="city-zip">92008 · 92009 · 92010 · 92011</div>
             </div>
           </div>
-          <p>Our home base. We're on Acacia Avenue, minutes from most of the city, which is why Carlsbad calls almost always get a same-day slot. We work across the whole spread of housing stock here — the older Village cottages with no ductwork at all, the 90s tract homes in Calavera, and the newer builds out toward Bressi Ranch.</p>
+          <p>Our home base. We're on Acacia Avenue in the Village, a few minutes from the seawall, which is why Carlsbad calls almost always get a same-day slot. We work across the whole spread of housing stock here — the older Village cottages with no ductwork at all, the bluff homes above Tamarack and Ponto taking salt spray head-on, the 90s tract homes up by Calavera, and the newer builds out toward Bressi Ranch. Between the two lagoons the humidity behaves differently again.</p>
           <div class="drow-cta" style="margin-top:22px">
             <a class="btn btn--teal" href="contact.html">Book in Carlsbad</a>
             <a class="btn btn--outline" href="tel:+17607502179"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> (760) 750-2179</a>
@@ -3109,7 +3128,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <div class="city-side">
           <h4>What we see in Carlsbad</h4>
           <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Salt-air corrosion on condensers west of the 5</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Salt-air corrosion on condensers west of the 101</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Mini-splits for Village cottages with no duct runs</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Zoning for two-storey homes in La Costa and Aviara</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Most jobs reached in under 15 minutes</span></li>
