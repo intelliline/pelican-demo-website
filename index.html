@@ -201,55 +201,60 @@
         </div>
       </div>
 
-      <!-- live system panel -->
+      <!-- live Carlsbad weather -->
       <div class="rv rv-d3">
-        <div class="livep">
+        <div class="livep wx" id="wx">
           <div class="livep-top">
             <span class="livep-dots"><i></i><i></i><i></i></span>
-            <span class="livep-id">PEL-SYS-01 · Aviara residence</span>
-            <span class="livep-badge"><span class="pulse-dot"></span> LIVE</span>
+            <span class="livep-id">Carlsbad, CA &middot; 92008</span>
+            <span class="livep-badge" id="wxBadge"><span class="pulse-dot"></span> <span id="wxBadgeT">LIVE</span></span>
           </div>
 
-          <div class="zones" id="zones">
-            <div class="zone" data-zone="0">
-              <div class="zone-h"><span class="zone-n">Zone 1 · Living</span><span class="zone-s zone-s--cool">COOLING</span></div>
-              <div class="zone-temp"><b data-temp>72</b><span>°F</span></div>
-              <div class="zone-bar"><i style="width:74%"></i></div>
-              <div class="zone-f"><span>SET 72°</span><span data-time>--:--:--</span></div>
+          <div class="wx-main">
+            <div class="wx-now">
+              <div class="wx-temp"><b id="wxTemp">79</b><span>&deg;F</span></div>
+              <div class="wx-cond" id="wxCond">Overcast</div>
+              <div class="wx-feels">Feels like <b id="wxFeels">84&deg;</b></div>
             </div>
-            <div class="zone" data-zone="1">
-              <div class="zone-h"><span class="zone-n">Zone 2 · Upstairs</span><span class="zone-s zone-s--cool">COOLING</span></div>
-              <div class="zone-temp"><b data-temp>75</b><span>°F</span></div>
-              <div class="zone-bar"><i style="width:58%"></i></div>
-              <div class="zone-f"><span>SET 72°</span><span data-time>--:--:--</span></div>
+            <div class="wx-icon" id="wxIcon" aria-hidden="true"></div>
+          </div>
+
+          <div class="wx-grid">
+            <div class="wx-cell">
+              <span class="wx-k">Humidity</span>
+              <b id="wxHum">67%</b>
             </div>
-            <div class="zone" data-zone="2">
-              <div class="zone-h"><span class="zone-n">Zone 3 · Primary</span><span class="zone-s zone-s--idle">IDLE</span></div>
-              <div class="zone-temp"><b data-temp>71</b><span>°F</span></div>
-              <div class="zone-bar"><i style="width:92%"></i></div>
-              <div class="zone-f"><span>SET 71°</span><span data-time>--:--:--</span></div>
+            <div class="wx-cell">
+              <span class="wx-k">Wind</span>
+              <b id="wxWind">3 mph</b>
             </div>
-            <div class="zone zone--heat" data-zone="3">
-              <div class="zone-h"><span class="zone-n">Outdoor · Carlsbad</span><span class="zone-s zone-s--heat">86° HIGH</span></div>
-              <div class="zone-temp"><b data-temp>84</b><span>°F</span></div>
-              <div class="zone-bar"><i style="width:80%"></i></div>
-              <div class="zone-f"><span>HUMIDITY 68%</span><span data-time>--:--:--</span></div>
+            <div class="wx-cell">
+              <span class="wx-k">Today's high</span>
+              <b id="wxHigh">82&deg;</b>
             </div>
+            <div class="wx-cell">
+              <span class="wx-k">Tonight's low</span>
+              <b id="wxLow">73&deg;</b>
+            </div>
+          </div>
+
+          <div class="wx-load">
+            <div class="wx-load-h">
+              <span class="wx-k">Cooling demand right now</span>
+              <b id="wxLoadT">Moderate</b>
+            </div>
+            <div class="wx-load-bar"><i id="wxLoadBar" style="width:52%"></i></div>
+            <p class="wx-load-p">Based on the current temperature and humidity in Carlsbad.</p>
           </div>
 
           <div class="livep-foot">
-            <span>FILTER LIFE <b id="filterLife">62%</b></span>
-            <span>RUNTIME TODAY <b>4h 18m</b></span>
-            <span>LAST SERVICE <b>MAR 2026</b></span>
-          </div>
-
-          <div class="livep-eta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9.9 9.9a2.8 2.8 0 0 1-4-4z"/><path d="M14.7 6.3l3-3"/></svg>
-            <span><b>Marcus is 12 minutes out.</b> Zone 2 flagged for a coil clean — you'll get a text when he arrives.</span>
+            <span>UPDATED <b id="wxTime">--:--</b></span>
+            <span>SOURCE <b>OPEN-METEO</b></span>
           </div>
         </div>
-        <p style="font-size:.74rem;color:rgba(255,255,255,.42);text-align:center;margin-top:14px;font-weight:600">
-          Illustrative system dashboard — sample data for this demo.
+        <p style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:center;margin-top:14px;font-weight:600">
+          Live conditions in Carlsbad. Not feeling it indoors?
+          <a href="tel:+17607502179" style="color:var(--sand-lt);font-weight:800">Call (760)&nbsp;750-2179</a> &mdash; answered 24/7.
         </p>
       </div>
     </div>
@@ -344,6 +349,7 @@
     </div>
   </div>
 </section>
+
 
 
 
