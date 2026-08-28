@@ -1401,42 +1401,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 }
 
 /* ==========================================================================
-   Hero photograph
-   To swap the image, change the url() below. The gradient underneath is the
-   fallback, so the hero still reads correctly if the photo ever fails.
-   ========================================================================== */
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background-color:var(--deep);
-  background-image:url("https://vibe.filesafe.space/1778084840736237174/assets/378580fb-d0a7-4ec6-8a10-cc7ff3fb08ae.png");
-  background-size:cover;
-  background-position:center 62%;
-  background-repeat:no-repeat;
-}
-/* Legibility veil: heavy behind the copy, clearing toward the photo's sky. */
-.hero-veil{
-  position:absolute;inset:0;z-index:1;
-  background:
-    linear-gradient(100deg,
-      rgba(6,22,28,.94) 0%,
-      rgba(8,30,38,.88) 30%,
-      rgba(11,44,55,.66) 55%,
-      rgba(13,52,64,.42) 78%,
-      rgba(15,58,70,.34) 100%),
-    linear-gradient(180deg, rgba(6,22,28,.55) 0%, rgba(6,22,28,0) 26%),
-    linear-gradient(0deg, rgba(6,22,28,.62) 0%, rgba(6,22,28,0) 30%);
-}
-@media (max-width:1080px){
-  /* single column: copy sits over the whole width, so veil evenly */
-  .hero-veil{
-    background:
-      linear-gradient(180deg, rgba(6,22,28,.90) 0%, rgba(8,30,38,.80) 45%, rgba(11,44,55,.78) 100%),
-      linear-gradient(0deg, rgba(6,22,28,.6) 0%, rgba(6,22,28,0) 30%);
-  }
-  .hero-bg{background-position:center 55%}
-}
-
-/* ==========================================================================
    LIGHT PASS
    Bright, sun-bleached treatment: light chrome, a light hero over the photo,
    lifted dark slabs, and the estimates badge moved out of the stats panel.
@@ -1451,73 +1415,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   border:1px solid var(--line);
   box-shadow:var(--shadow-sm);
 }
-
-/* ---- 3. the hero, rebuilt light ---------------------------------------- */
-.hero-bg{background-position:center 58%}
-.hero .hero-h,.hero h1{color:var(--deep)}
-.hero .hero-h em,.hero h1 em{color:var(--sand-dk)}
-.hero .hero-h em::after,.hero h1 em::after{background:rgba(201,123,66,.20)}
-.hero-sub{color:var(--slate)}
-.hero .eyebrow{color:var(--teal)!important}
-
-.hero-rating{
-  background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);
-}
-.hero-rating span{color:var(--slate)}
-.hero-rating b{color:var(--deep)}
-
-.hero .wxbar{
-  background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);
-}
-.hero .wxbar-t{color:var(--slate)}
-.hero .wxbar-t b,.hero .wxbar-t #wxTemp,.hero .wxbar-t #wxHum{color:var(--deep)}
-.hero .wxbar-t #wxCond{color:var(--sand-dk)}
-.hero .wxbar-badge{border-left-color:var(--line);color:#15803D}
-.hero .wxbar-badge.is-snap{color:var(--slate-lt)}
-.hero .wxbar-badge.is-snap .pulse-dot{background:var(--slate-lt)}
-
-.hero .btn--ghost{
-  background:#fff;color:var(--teal);border:1.6px solid var(--teal);backdrop-filter:none;
-  box-shadow:0 1px 2px rgba(15,51,62,.06);
-}
-.hero .btn--ghost:hover{background:var(--teal);color:#fff}
-
-.hnav-btn{background:#fff;border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
-.hnav-btn:hover{background:var(--teal-xlt);border-color:var(--teal)}
-.hnav-btn svg{color:var(--deep)}
-.hdot{background:rgba(15,51,62,.20)}
-.hcount{color:var(--slate-lt)}
-.hcount b{color:var(--deep)}
-
-/* hero estimate card: solid white instead of dark glass */
-.hero-card{
-  background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-lg);
-  backdrop-filter:none;
-}
-.hero-card h3{color:var(--deep)}
-.hero-card p{color:var(--slate)}
-.hero-card-h b{color:#15803D}
-.hcf input,.hcf select,.hcf textarea{
-  background:#fff;border:1.5px solid var(--line);color:var(--ink);
-}
-.hcf input::placeholder,.hcf textarea::placeholder{color:#9DB0B6}
-.hcf input:focus,.hcf select:focus,.hcf textarea:focus{
-  border-color:var(--teal);background:#fff;box-shadow:0 0 0 4px rgba(34,119,145,.12);
-}
-.hcf select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F333E' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
-.hcf select option{background:#fff;color:var(--ink)}
-.hcf-note{color:var(--slate-lt)}
-.hcf-note svg{color:var(--ok)}
-.hero-success h4{color:var(--deep)}
-.hero-success p{color:var(--slate)}
-.hero-success .tick{background:rgba(22,163,74,.10);border-color:var(--ok)}
-.hero-success .tick svg{color:var(--ok)}
-.hero-timer{background:rgba(22,163,74,.10);border:1px solid rgba(22,163,74,.30)}
-.hero-timer b{color:var(--ok)}
-.hero-timer span{color:var(--slate)}
-
-/* the wave under the hero now separates two light surfaces -- soften it */
-.hero-wave svg path{fill:#fff}
 
 /* ---- 4. inner-page headers go light too -------------------------------- */
 .phero-bg{display:none}
@@ -1550,10 +1447,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    clearly visible while the deep-teal type stays well above contrast minimums. */
 @media (max-width:1080px){  }
 
-/* Final hero balance: the wash is light enough that the beach, surf line and
-   bluff all read, and the body copy is darkened so it still clears 4.5:1 over
-   the darker sand rather than only over the bright foam. */
-.hero-bg{background-position:center 66%}
 @media (max-width:1080px){  }
 
 /* ==========================================================================
@@ -1578,7 +1471,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .phero{background:var(--teal-xlt)}
 
 /* hero wash is neutral white, and the body copy is brand deep teal */
-.hero-veil{background:rgba(255,255,255,.55)}
-@media (max-width:1080px){ .hero-veil{background:rgba(255,255,255,.68)} }
-.hero-sub{color:rgba(15,51,62,.88)}
+@media (max-width:1080px){  }
 .hero-wave svg path{fill:#fff}
+
+/* ==========================================================================
+   Hero: solid brand teal, no photograph
+   ========================================================================== */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:#227791;
+  background-image:none;
+}
+.hero-veil{display:none}
+/* white type on #227791 measures 5.1:1 — clears AA for body as well as display */
+.hero .hero-h,.hero h1{color:#fff}
+.hero .hero-h em,.hero h1 em{color:var(--sand-lt)}
+.hero .hero-h em::after,.hero h1 em::after{background:rgba(243,199,156,.26)}
+.hero-sub{color:rgba(255,255,255,.86)}
+.hero-wave svg path{fill:#fff}
+
+/* glass elements need a touch more presence on mid teal than on near-black */
+.hero-rating{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26)}
+.hero .wxbar{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26)}
+.hero-card{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(18px)}
+.hcf input,.hcf select,.hcf textarea{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.30)}
+.hnav-btn{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.30)}
