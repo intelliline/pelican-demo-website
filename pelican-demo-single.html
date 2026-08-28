@@ -1323,6 +1323,40 @@ a.svc-link{cursor:pointer}
   .wx-grid{grid-template-columns:1fr 1fr}
 }
 
+/* ==========================================================================
+   Compact weather strip (replaces the full panel in the hero)
+   ========================================================================== */
+.wxbar{
+  display:inline-flex;align-items:center;gap:11px;
+  padding:7px 14px 7px 9px;border-radius:999px;margin-bottom:26px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(8px);max-width:100%;
+}
+.wxbar-ico{width:26px;height:26px;flex:none;opacity:.95;display:block}
+.wxbar-ico svg{width:100%;height:100%;display:block}
+.wxbar-t{
+  font-size:.845rem;font-weight:600;color:rgba(255,255,255,.72);
+  letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.wxbar-t b{color:#fff;font-weight:800;margin-right:5px}
+.wxbar-t #wxTemp,.wxbar-t #wxHum{color:#fff;font-weight:800;font-variant-numeric:tabular-nums}
+.wxbar-t #wxCond{color:var(--sand-lt);font-weight:700}
+.wxbar-badge{
+  display:inline-flex;align-items:center;gap:5px;flex:none;
+  font-size:.6rem;font-weight:800;letter-spacing:.09em;color:#4ADE80;
+  padding-left:11px;border-left:1px solid rgba(255,255,255,.14);
+}
+.wxbar-badge .pulse-dot{width:5px;height:5px}
+.wxbar-badge.is-snap{color:rgba(255,255,255,.5)}
+.wxbar-badge.is-snap .pulse-dot{background:rgba(255,255,255,.35);animation:none;box-shadow:none}
+
+@media (max-width:640px){
+  .wxbar{gap:9px;padding:6px 12px 6px 8px;margin-bottom:20px}
+  .wxbar-t{font-size:.78rem;white-space:normal}
+  .wxbar-ico{width:22px;height:22px}
+  .wxbar-badge{display:none}
+}
+
 /* single-file router */
 .pagepanel{display:none}
 .pagepanel.is-current{display:block}
@@ -1465,6 +1499,19 @@ a.svc-link{cursor:pointer}
           <span><b>5.0</b> Google rating · 25+ years in Carlsbad</span>
         </div>
 
+        <div class="wxbar rv rv-d1" id="wx" title="Live conditions in Carlsbad">
+          <span class="wxbar-ico" id="wxIcon" aria-hidden="true"></span>
+          <span class="wxbar-t">
+            <b>Carlsbad now</b>
+            <span id="wxTemp">79</span>&deg;F
+            &middot; <span id="wxHum">67%</span> humidity
+            &middot; <span id="wxCond">Overcast</span>
+          </span>
+          <span class="wxbar-badge is-snap" id="wxBadge">
+            <span class="pulse-dot"></span><span id="wxBadgeT">SNAPSHOT</span>
+          </span>
+        </div>
+
         <div class="slides" id="slides">
           
         <div class="slide is-on" data-slide="0">
@@ -1516,61 +1563,44 @@ a.svc-link{cursor:pointer}
         </div>
       </div>
 
-      <!-- live Carlsbad weather -->
-      <div class="rv rv-d3">
-        <div class="livep wx" id="wx">
-          <div class="livep-top">
-            <span class="livep-dots"><i></i><i></i><i></i></span>
-            <span class="livep-id">Carlsbad, CA &middot; 92008</span>
-            <span class="livep-badge is-snap" id="wxBadge"><span class="pulse-dot"></span> <span id="wxBadgeT">SNAPSHOT</span></span>
-          </div>
-
-          <div class="wx-main">
-            <div class="wx-now">
-              <div class="wx-temp"><b id="wxTemp">79</b><span>&deg;F</span></div>
-              <div class="wx-cond" id="wxCond">Overcast</div>
-              <div class="wx-feels">Feels like <b id="wxFeels">84&deg;</b></div>
+      <!-- hero estimate form -->
+      <div class="hero-card rv rv-d3">
+        <div id="hFormWrap">
+          <div class="hero-card-h"><span class="pulse-dot"></span><b>Answering now</b></div>
+          <h3>Get a free estimate</h3>
+          <p>Send this and you'll hear back in under a minute &mdash; text first, then a call if you'd rather talk.</p>
+          <form class="hcf" id="hForm" novalidate>
+            <div class="hcf-row">
+              <input type="text" name="first" placeholder="First name" autocomplete="given-name" required>
+              <input type="text" name="last" placeholder="Last name" autocomplete="family-name">
             </div>
-            <div class="wx-icon" id="wxIcon" aria-hidden="true"></div>
-          </div>
-
-          <div class="wx-grid">
-            <div class="wx-cell">
-              <span class="wx-k">Humidity</span>
-              <b id="wxHum">67%</b>
-            </div>
-            <div class="wx-cell">
-              <span class="wx-k">Wind</span>
-              <b id="wxWind">3 mph</b>
-            </div>
-            <div class="wx-cell">
-              <span class="wx-k">Today's high</span>
-              <b id="wxHigh">82&deg;</b>
-            </div>
-            <div class="wx-cell">
-              <span class="wx-k">Tonight's low</span>
-              <b id="wxLow">73&deg;</b>
-            </div>
-          </div>
-
-          <div class="wx-load">
-            <div class="wx-load-h">
-              <span class="wx-k">Cooling demand right now</span>
-              <b id="wxLoadT">Moderate</b>
-            </div>
-            <div class="wx-load-bar"><i id="wxLoadBar" style="width:52%"></i></div>
-            <p class="wx-load-p">Based on the current temperature and humidity in Carlsbad.</p>
-          </div>
-
-          <div class="livep-foot">
-            <span>UPDATED <b id="wxTime">--:--</b></span>
-            <span>SOURCE <b>OPEN-METEO</b></span>
+            <input type="tel" name="phone" placeholder="Mobile number" autocomplete="tel" required>
+            <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <select name="need" required>
+              <option value="">What do you need help with?</option>
+              <option>AC isn't cooling</option>
+              <option>Heater isn't working</option>
+              <option>New system / replacement quote</option>
+              <option>Maintenance or tune-up</option>
+              <option>Mini-split or ductless</option>
+              <option>Indoor air quality</option>
+              <option>Something else</option>
+            </select>
+            <button class="btn btn--primary" type="submit">Get My Free Estimate</button>
+          </form>
+          <div class="hcf-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span>Your details go straight to our dispatch team. No call centres, no spam, no obligation.</span>
           </div>
         </div>
-        <p style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:center;margin-top:14px;font-weight:600">
-          Live conditions in Carlsbad. Not feeling it indoors?
-          <a href="tel:+17607502179" style="color:var(--sand-lt);font-weight:800">Call (760)&nbsp;750-2179</a> &mdash; answered 24/7.
-        </p>
+
+        <div class="hero-success" id="hSuccess">
+          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h4>Got it &mdash; you're in the queue</h4>
+          <p>A confirmation text just went out and dispatch has your request.</p>
+          <div class="hero-timer"><b id="hTimer">0.0</b><span>seconds to first response</span></div>
+          <p style="font-size:.76rem;color:rgba(255,255,255,.45);margin-top:14px">Demo preview &mdash; nothing was actually sent.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1664,6 +1694,7 @@ a.svc-link{cursor:pointer}
     </div>
   </div>
 </section>
+
 
 
 
@@ -3792,6 +3823,7 @@ a.svc-link{cursor:pointer}
   };
   wireForm('#heroForm', '#heroFormWrap', '#heroSuccess', '#heroTimer', 0.8);
   wireForm('#mainForm', '#mainFormWrap', '#mainSuccess', '#mainTimer', 1.1);
+  wireForm('#hForm', '#hFormWrap', '#hSuccess', '#hTimer', 0.9);
 
   /* ---------- missed-call SMS animation ------------------------------------ */
   var smsBody = $('#smsBody');
@@ -4037,23 +4069,45 @@ a.svc-link{cursor:pointer}
       return { score: score, label: label };
     };
 
+    /* every field is optional -- the panel may be compact or full */
+    var put = function (id, val, asHtml) {
+      var el = $(id);
+      if (!el) return;
+      if (asHtml) el.innerHTML = val; else el.textContent = val;
+    };
+
     var paint = function (c, daily) {
-      var code = WMO[c.weather_code] || ['—', 'cloud'];
-      $('#wxTemp').textContent = Math.round(c.temperature_2m);
-      $('#wxCond').textContent = code[0];
-      $('#wxFeels').innerHTML = Math.round(c.apparent_temperature) + '&deg;';
-      $('#wxHum').textContent = Math.round(c.relative_humidity_2m) + '%';
-      $('#wxWind').textContent = Math.round(c.wind_speed_10m) + ' mph';
-      $('#wxIcon').innerHTML = ART[code[1]] || ART.cloud;
-      if (daily) {
-        $('#wxHigh').innerHTML = Math.round(daily.temperature_2m_max[0]) + '&deg;';
-        $('#wxLow').innerHTML = Math.round(daily.temperature_2m_min[0]) + '&deg;';
+      var code = WMO[c.weather_code] || ['\u2014', 'cloud'];
+      var t = new Date();
+      var time = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      put('#wxTemp', Math.round(c.temperature_2m));
+      put('#wxCond', code[0]);
+      put('#wxFeels', Math.round(c.apparent_temperature) + '&deg;', true);
+      put('#wxHum', Math.round(c.relative_humidity_2m) + '%');
+      put('#wxWind', Math.round(c.wind_speed_10m) + ' mph');
+      put('#wxIcon', ART[code[1]] || ART.cloud, true);
+      if (daily && daily.temperature_2m_max) {
+        put('#wxHigh', Math.round(daily.temperature_2m_max[0]) + '&deg;', true);
+        put('#wxLow', Math.round(daily.temperature_2m_min[0]) + '&deg;', true);
       }
       var d = demand(c.temperature_2m, c.relative_humidity_2m);
-      $('#wxLoadT').textContent = d.label;
-      $('#wxLoadBar').style.width = d.score + '%';
-      var t = new Date();
-      $('#wxTime').textContent = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      put('#wxLoadT', d.label);
+      var bar = $('#wxLoadBar');
+      if (bar) bar.style.width = d.score + '%';
+      put('#wxTime', time);
+
+      /* the compact strip hides the detail -- keep it in the tooltip */
+      if (wx) {
+        wx.setAttribute('title',
+          'Carlsbad, CA \u00b7 ' + Math.round(c.temperature_2m) + '\u00b0F, feels like '
+          + Math.round(c.apparent_temperature) + '\u00b0'
+          + (daily && daily.temperature_2m_max
+              ? ' \u00b7 high ' + Math.round(daily.temperature_2m_max[0]) + '\u00b0 / low ' + Math.round(daily.temperature_2m_min[0]) + '\u00b0'
+              : '')
+          + ' \u00b7 wind ' + Math.round(c.wind_speed_10m) + ' mph'
+          + ' \u00b7 cooling demand ' + d.label.toLowerCase()
+          + ' \u00b7 updated ' + time);
+      }
     };
 
     var load = function () {

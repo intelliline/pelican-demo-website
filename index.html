@@ -150,6 +150,19 @@
           <span><b>5.0</b> Google rating · 25+ years in Carlsbad</span>
         </div>
 
+        <div class="wxbar rv rv-d1" id="wx" title="Live conditions in Carlsbad">
+          <span class="wxbar-ico" id="wxIcon" aria-hidden="true"></span>
+          <span class="wxbar-t">
+            <b>Carlsbad now</b>
+            <span id="wxTemp">79</span>&deg;F
+            &middot; <span id="wxHum">67%</span> humidity
+            &middot; <span id="wxCond">Overcast</span>
+          </span>
+          <span class="wxbar-badge is-snap" id="wxBadge">
+            <span class="pulse-dot"></span><span id="wxBadgeT">SNAPSHOT</span>
+          </span>
+        </div>
+
         <div class="slides" id="slides">
           
         <div class="slide is-on" data-slide="0">
@@ -201,61 +214,44 @@
         </div>
       </div>
 
-      <!-- live Carlsbad weather -->
-      <div class="rv rv-d3">
-        <div class="livep wx" id="wx">
-          <div class="livep-top">
-            <span class="livep-dots"><i></i><i></i><i></i></span>
-            <span class="livep-id">Carlsbad, CA &middot; 92008</span>
-            <span class="livep-badge is-snap" id="wxBadge"><span class="pulse-dot"></span> <span id="wxBadgeT">SNAPSHOT</span></span>
-          </div>
-
-          <div class="wx-main">
-            <div class="wx-now">
-              <div class="wx-temp"><b id="wxTemp">79</b><span>&deg;F</span></div>
-              <div class="wx-cond" id="wxCond">Overcast</div>
-              <div class="wx-feels">Feels like <b id="wxFeels">84&deg;</b></div>
+      <!-- hero estimate form -->
+      <div class="hero-card rv rv-d3">
+        <div id="hFormWrap">
+          <div class="hero-card-h"><span class="pulse-dot"></span><b>Answering now</b></div>
+          <h3>Get a free estimate</h3>
+          <p>Send this and you'll hear back in under a minute &mdash; text first, then a call if you'd rather talk.</p>
+          <form class="hcf" id="hForm" novalidate>
+            <div class="hcf-row">
+              <input type="text" name="first" placeholder="First name" autocomplete="given-name" required>
+              <input type="text" name="last" placeholder="Last name" autocomplete="family-name">
             </div>
-            <div class="wx-icon" id="wxIcon" aria-hidden="true"></div>
-          </div>
-
-          <div class="wx-grid">
-            <div class="wx-cell">
-              <span class="wx-k">Humidity</span>
-              <b id="wxHum">67%</b>
-            </div>
-            <div class="wx-cell">
-              <span class="wx-k">Wind</span>
-              <b id="wxWind">3 mph</b>
-            </div>
-            <div class="wx-cell">
-              <span class="wx-k">Today's high</span>
-              <b id="wxHigh">82&deg;</b>
-            </div>
-            <div class="wx-cell">
-              <span class="wx-k">Tonight's low</span>
-              <b id="wxLow">73&deg;</b>
-            </div>
-          </div>
-
-          <div class="wx-load">
-            <div class="wx-load-h">
-              <span class="wx-k">Cooling demand right now</span>
-              <b id="wxLoadT">Moderate</b>
-            </div>
-            <div class="wx-load-bar"><i id="wxLoadBar" style="width:52%"></i></div>
-            <p class="wx-load-p">Based on the current temperature and humidity in Carlsbad.</p>
-          </div>
-
-          <div class="livep-foot">
-            <span>UPDATED <b id="wxTime">--:--</b></span>
-            <span>SOURCE <b>OPEN-METEO</b></span>
+            <input type="tel" name="phone" placeholder="Mobile number" autocomplete="tel" required>
+            <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <select name="need" required>
+              <option value="">What do you need help with?</option>
+              <option>AC isn't cooling</option>
+              <option>Heater isn't working</option>
+              <option>New system / replacement quote</option>
+              <option>Maintenance or tune-up</option>
+              <option>Mini-split or ductless</option>
+              <option>Indoor air quality</option>
+              <option>Something else</option>
+            </select>
+            <button class="btn btn--primary" type="submit">Get My Free Estimate</button>
+          </form>
+          <div class="hcf-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span>Your details go straight to our dispatch team. No call centres, no spam, no obligation.</span>
           </div>
         </div>
-        <p style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:center;margin-top:14px;font-weight:600">
-          Live conditions in Carlsbad. Not feeling it indoors?
-          <a href="tel:+17607502179" style="color:var(--sand-lt);font-weight:800">Call (760)&nbsp;750-2179</a> &mdash; answered 24/7.
-        </p>
+
+        <div class="hero-success" id="hSuccess">
+          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h4>Got it &mdash; you're in the queue</h4>
+          <p>A confirmation text just went out and dispatch has your request.</p>
+          <div class="hero-timer"><b id="hTimer">0.0</b><span>seconds to first response</span></div>
+          <p style="font-size:.76rem;color:rgba(255,255,255,.45);margin-top:14px">Demo preview &mdash; nothing was actually sent.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -349,6 +345,7 @@
     </div>
   </div>
 </section>
+
 
 
 
