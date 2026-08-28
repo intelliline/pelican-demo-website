@@ -1345,3 +1345,57 @@ a.svc-link{cursor:pointer}
   .wxbar-ico{width:22px;height:22px}
   .wxbar-badge{display:none}
 }
+
+/* ==========================================================================
+   Fixes from the layout/contrast audit
+   ========================================================================== */
+
+/* Secondary buttons had a white fill and a near-white border (--line), so on
+   white cards they vanished into the surface. Give them a real teal edge. */
+.btn--outline{
+  background:#fff;
+  color:var(--teal);
+  border:1.6px solid var(--teal);
+  box-shadow:0 1px 2px rgba(15,51,62,.06);
+}
+.btn--outline:hover{
+  background:var(--teal);
+  color:#fff;
+  border-color:var(--teal);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(34,119,145,.28);
+}
+/* on the sand offer panel the teal edge still reads, but deepen it slightly */
+.offer .btn--outline{border-color:var(--deep);color:var(--deep)}
+.offer .btn--outline:hover{background:var(--deep);color:#fff;border-color:var(--deep)}
+
+/* Touch targets: these two sat under the 44px minimum. */
+.reqbar-form .btn{min-height:44px}
+.mc-replay{min-height:40px;padding:10px 18px}
+@media (max-width:640px){
+  .mc-replay{min-height:44px}
+  .btn{min-height:44px}
+}
+
+/* Keyboard focus was relying on the browser default, which the pill shapes hid. */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--sand);
+  outline-offset:2px;
+  border-radius:8px;
+}
+.section--deep a:focus-visible,.stl a:focus-visible,.hero a:focus-visible,
+.section--deep button:focus-visible,.hero button:focus-visible{
+  outline-color:var(--sand-lt);
+}
+
+/* Carousel slides 2-3 are promotional lines, not page titles, so they are <p>
+   elements now -- they still need the h1 treatment visually. */
+.hero .hero-h{
+  margin:0 0 22px;font-weight:800;color:#fff;
+  font-size:clamp(2.35rem,5.4vw,4.15rem);line-height:1.12;letter-spacing:-.035em;
+}
+.hero .hero-h em{font-style:normal;color:var(--sand);position:relative;white-space:nowrap}
+.hero .hero-h em::after{
+  content:"";position:absolute;left:0;right:0;bottom:.03em;height:.13em;
+  background:rgba(230,154,96,.28);border-radius:3px;z-index:-1;
+}
