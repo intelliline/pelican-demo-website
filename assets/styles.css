@@ -1399,3 +1399,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   content:"";position:absolute;left:0;right:0;bottom:.03em;height:.13em;
   background:rgba(230,154,96,.28);border-radius:3px;z-index:-1;
 }
+
+/* ==========================================================================
+   Hero photograph
+   To swap the image, change the url() below. The gradient underneath is the
+   fallback, so the hero still reads correctly if the photo ever fails.
+   ========================================================================== */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-color:var(--deep);
+  background-image:url("https://vibe.filesafe.space/1778084840736237174/assets/378580fb-d0a7-4ec6-8a10-cc7ff3fb08ae.png");
+  background-size:cover;
+  background-position:center 62%;
+  background-repeat:no-repeat;
+}
+/* Legibility veil: heavy behind the copy, clearing toward the photo's sky. */
+.hero-veil{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(100deg,
+      rgba(6,22,28,.94) 0%,
+      rgba(8,30,38,.88) 30%,
+      rgba(11,44,55,.66) 55%,
+      rgba(13,52,64,.42) 78%,
+      rgba(15,58,70,.34) 100%),
+    linear-gradient(180deg, rgba(6,22,28,.55) 0%, rgba(6,22,28,0) 26%),
+    linear-gradient(0deg, rgba(6,22,28,.62) 0%, rgba(6,22,28,0) 30%);
+}
+@media (max-width:1080px){
+  /* single column: copy sits over the whole width, so veil evenly */
+  .hero-veil{
+    background:
+      linear-gradient(180deg, rgba(6,22,28,.90) 0%, rgba(8,30,38,.80) 45%, rgba(11,44,55,.78) 100%),
+      linear-gradient(0deg, rgba(6,22,28,.6) 0%, rgba(6,22,28,0) 30%);
+  }
+  .hero-bg{background-position:center 55%}
+}
