@@ -1357,6 +1357,60 @@ a.svc-link{cursor:pointer}
   .wxbar-badge{display:none}
 }
 
+/* ==========================================================================
+   Fixes from the layout/contrast audit
+   ========================================================================== */
+
+/* Secondary buttons had a white fill and a near-white border (--line), so on
+   white cards they vanished into the surface. Give them a real teal edge. */
+.btn--outline{
+  background:#fff;
+  color:var(--teal);
+  border:1.6px solid var(--teal);
+  box-shadow:0 1px 2px rgba(15,51,62,.06);
+}
+.btn--outline:hover{
+  background:var(--teal);
+  color:#fff;
+  border-color:var(--teal);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(34,119,145,.28);
+}
+/* on the sand offer panel the teal edge still reads, but deepen it slightly */
+.offer .btn--outline{border-color:var(--deep);color:var(--deep)}
+.offer .btn--outline:hover{background:var(--deep);color:#fff;border-color:var(--deep)}
+
+/* Touch targets: these two sat under the 44px minimum. */
+.reqbar-form .btn{min-height:44px}
+.mc-replay{min-height:40px;padding:10px 18px}
+@media (max-width:640px){
+  .mc-replay{min-height:44px}
+  .btn{min-height:44px}
+}
+
+/* Keyboard focus was relying on the browser default, which the pill shapes hid. */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--sand);
+  outline-offset:2px;
+  border-radius:8px;
+}
+.section--deep a:focus-visible,.stl a:focus-visible,.hero a:focus-visible,
+.section--deep button:focus-visible,.hero button:focus-visible{
+  outline-color:var(--sand-lt);
+}
+
+/* Carousel slides 2-3 are promotional lines, not page titles, so they are <p>
+   elements now -- they still need the h1 treatment visually. */
+.hero .hero-h{
+  margin:0 0 22px;font-weight:800;color:#fff;
+  font-size:clamp(2.35rem,5.4vw,4.15rem);line-height:1.12;letter-spacing:-.035em;
+}
+.hero .hero-h em{font-style:normal;color:var(--sand);position:relative;white-space:nowrap}
+.hero .hero-h em::after{
+  content:"";position:absolute;left:0;right:0;bottom:.03em;height:.13em;
+  background:rgba(230,154,96,.28);border-radius:3px;z-index:-1;
+}
+
 /* single-file router */
 .pagepanel{display:none}
 .pagepanel.is-current{display:block}
@@ -1379,7 +1433,7 @@ a.svc-link{cursor:pointer}
       </span>
     </div>
     <form class="reqbar-form" id="reqForm" novalidate>
-      <input type="tel" id="reqPhone" placeholder="Your phone number…" autocomplete="tel" required>
+      <input type="tel" id="reqPhone" placeholder="Your phone number…" aria-label="Your phone number for a callback" autocomplete="tel" required>
       <button class="btn btn--primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg> Call me now</button>
     </form>
     <span class="reqbar-ok" id="reqOk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Got it — calling you now.</span>
@@ -1516,7 +1570,7 @@ a.svc-link{cursor:pointer}
           
         <div class="slide is-on" data-slide="0">
           <span class="eyebrow" style="color:var(--sand)">Air conditioning · Carlsbad &amp; North County</span>
-          <h1>Coastal comfort,<br>handled the <em>same day</em>.</h1>
+          <h1 class="hero-h">Coastal comfort,<br>handled the <em>same day</em>.</h1>
           <p class="hero-sub">Pelican Heating &amp; Air has kept North County San Diego homes comfortable for over 25 years. Licensed, insured and locally owned in Carlsbad — with a real person on the phone at any hour.</p>
           <div class="hero-btns">
             <a class="btn btn--primary btn--lg" href="tel:+17607502179"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> Call (760) 750-2179</a>
@@ -1525,7 +1579,7 @@ a.svc-link{cursor:pointer}
         </div>
         <div class="slide" data-slide="1">
           <span class="eyebrow" style="color:var(--sand)">Emergency service · 24 hours, 7 days</span>
-          <h1>No cooling at 2am?<br>We <em>actually answer</em>.</h1>
+          <p class="hero-h">No cooling at 2am?<br>We <em>actually answer</em>.</p>
           <p class="hero-sub">No answering service, no overnight voicemail box. Nights, weekends and holidays, the phone is picked up by someone in Carlsbad who can see today's schedule and get you on it.</p>
           <div class="hero-btns">
             <a class="btn btn--primary btn--lg" href="tel:+17607502179"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> Call (760) 750-2179</a>
@@ -1534,7 +1588,7 @@ a.svc-link{cursor:pointer}
         </div>
         <div class="slide" data-slide="2">
           <span class="eyebrow" style="color:var(--sand)">System replacement · Free written estimates</span>
-          <h1>A new system,<br>sized for <em>your house</em>.</h1>
+          <p class="hero-h">A new system,<br>sized for <em>your house</em>.</p>
           <p class="hero-sub">We measure the home — square footage, insulation, window orientation, ceiling height — before we recommend anything. Then you get the number in writing, itemised, with no pressure attached.</p>
           <div class="hero-btns">
             <a class="btn btn--primary btn--lg" href="tel:+17607502179"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> Call (760) 750-2179</a>
@@ -1571,12 +1625,12 @@ a.svc-link{cursor:pointer}
           <p>Send this and you'll hear back in under a minute &mdash; text first, then a call if you'd rather talk.</p>
           <form class="hcf" id="hForm" novalidate>
             <div class="hcf-row">
-              <input type="text" name="first" placeholder="First name" autocomplete="given-name" required>
-              <input type="text" name="last" placeholder="Last name" autocomplete="family-name">
+              <input type="text" name="first" placeholder="First name" aria-label="First name" autocomplete="given-name" required>
+              <input type="text" name="last" placeholder="Last name" aria-label="Last name" autocomplete="family-name">
             </div>
-            <input type="tel" name="phone" placeholder="Mobile number" autocomplete="tel" required>
-            <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
-            <select name="need" required>
+            <input type="tel" name="phone" placeholder="Mobile number" aria-label="Mobile number" autocomplete="tel" required>
+            <input type="email" name="email" placeholder="Email address" aria-label="Email address" autocomplete="email" required>
+            <select name="need" aria-label="What do you need help with?" required>
               <option value="">What do you need help with?</option>
               <option>AC isn't cooling</option>
               <option>Heater isn't working</option>
@@ -1694,6 +1748,8 @@ a.svc-link{cursor:pointer}
     </div>
   </div>
 </section>
+
+
 
 
 

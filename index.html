@@ -32,7 +32,7 @@
       </span>
     </div>
     <form class="reqbar-form" id="reqForm" novalidate>
-      <input type="tel" id="reqPhone" placeholder="Your phone number…" autocomplete="tel" required>
+      <input type="tel" id="reqPhone" placeholder="Your phone number…" aria-label="Your phone number for a callback" autocomplete="tel" required>
       <button class="btn btn--primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg> Call me now</button>
     </form>
     <span class="reqbar-ok" id="reqOk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Got it — calling you now.</span>
@@ -167,7 +167,7 @@
           
         <div class="slide is-on" data-slide="0">
           <span class="eyebrow" style="color:var(--sand)">Air conditioning · Carlsbad &amp; North County</span>
-          <h1>Coastal comfort,<br>handled the <em>same day</em>.</h1>
+          <h1 class="hero-h">Coastal comfort,<br>handled the <em>same day</em>.</h1>
           <p class="hero-sub">Pelican Heating &amp; Air has kept North County San Diego homes comfortable for over 25 years. Licensed, insured and locally owned in Carlsbad — with a real person on the phone at any hour.</p>
           <div class="hero-btns">
             <a class="btn btn--primary btn--lg" href="tel:+17607502179"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> Call (760) 750-2179</a>
@@ -176,7 +176,7 @@
         </div>
         <div class="slide" data-slide="1">
           <span class="eyebrow" style="color:var(--sand)">Emergency service · 24 hours, 7 days</span>
-          <h1>No cooling at 2am?<br>We <em>actually answer</em>.</h1>
+          <p class="hero-h">No cooling at 2am?<br>We <em>actually answer</em>.</p>
           <p class="hero-sub">No answering service, no overnight voicemail box. Nights, weekends and holidays, the phone is picked up by someone in Carlsbad who can see today's schedule and get you on it.</p>
           <div class="hero-btns">
             <a class="btn btn--primary btn--lg" href="tel:+17607502179"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> Call (760) 750-2179</a>
@@ -185,7 +185,7 @@
         </div>
         <div class="slide" data-slide="2">
           <span class="eyebrow" style="color:var(--sand)">System replacement · Free written estimates</span>
-          <h1>A new system,<br>sized for <em>your house</em>.</h1>
+          <p class="hero-h">A new system,<br>sized for <em>your house</em>.</p>
           <p class="hero-sub">We measure the home — square footage, insulation, window orientation, ceiling height — before we recommend anything. Then you get the number in writing, itemised, with no pressure attached.</p>
           <div class="hero-btns">
             <a class="btn btn--primary btn--lg" href="tel:+17607502179"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> Call (760) 750-2179</a>
@@ -222,12 +222,12 @@
           <p>Send this and you'll hear back in under a minute &mdash; text first, then a call if you'd rather talk.</p>
           <form class="hcf" id="hForm" novalidate>
             <div class="hcf-row">
-              <input type="text" name="first" placeholder="First name" autocomplete="given-name" required>
-              <input type="text" name="last" placeholder="Last name" autocomplete="family-name">
+              <input type="text" name="first" placeholder="First name" aria-label="First name" autocomplete="given-name" required>
+              <input type="text" name="last" placeholder="Last name" aria-label="Last name" autocomplete="family-name">
             </div>
-            <input type="tel" name="phone" placeholder="Mobile number" autocomplete="tel" required>
-            <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
-            <select name="need" required>
+            <input type="tel" name="phone" placeholder="Mobile number" aria-label="Mobile number" autocomplete="tel" required>
+            <input type="email" name="email" placeholder="Email address" aria-label="Email address" autocomplete="email" required>
+            <select name="need" aria-label="What do you need help with?" required>
               <option value="">What do you need help with?</option>
               <option>AC isn't cooling</option>
               <option>Heater isn't working</option>
@@ -345,6 +345,8 @@
     </div>
   </div>
 </section>
+
+
 
 
 
