@@ -1475,24 +1475,36 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .hero-wave svg path{fill:#fff}
 
 /* ==========================================================================
-   Hero: solid brand teal, no photograph
+   Hero: deep teal #0F333E over the Carlsbad coast
    ========================================================================== */
 .hero-bg{
   position:absolute;inset:0;z-index:0;
-  background:#227791;
-  background-image:none;
+  background:#0F333E url(coast.webp) center 58%/cover no-repeat;
+  filter:saturate(.62) brightness(.92) contrast(1.03);
 }
-.hero-veil{display:none}
-/* white type on #227791 measures 5.1:1 — clears AA for body as well as display */
+.hero-veil{
+  display:block;position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(15,51,62,.93) 0%,rgba(15,51,62,.84) 34%,rgba(15,51,62,.55) 68%,rgba(15,51,62,.40) 100%),
+    linear-gradient(180deg,rgba(15,51,62,.58) 0%,rgba(15,51,62,.16) 40%,rgba(15,51,62,.66) 100%);
+}
+@media(max-width:820px){
+  .hero-veil{background:linear-gradient(180deg,rgba(15,51,62,.82) 0%,rgba(15,51,62,.70) 45%,rgba(15,51,62,.88) 100%)}
+}
+/* white on #0F333E measures 13.9:1 — clears AA and AAA */
 .hero .hero-h,.hero h1{color:#fff}
 .hero .hero-h em,.hero h1 em{color:var(--sand-lt)}
 .hero .hero-h em::after,.hero h1 em::after{background:rgba(243,199,156,.26)}
-.hero-sub{color:rgba(255,255,255,.86)}
+.hero-sub{color:rgba(255,255,255,.88)}
 .hero-wave svg path{fill:#fff}
 
-/* glass elements need a touch more presence on mid teal than on near-black */
-.hero-rating{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26)}
-.hero .wxbar{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26)}
-.hero-card{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(18px)}
-.hcf input,.hcf select,.hcf textarea{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.30)}
-.hnav-btn{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.30)}
+/* glass elements on deep teal */
+.hero-rating{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.26)}
+.hero .wxbar{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.26)}
+.hero-card{background:rgba(15,51,62,.52);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(20px)}
+.hcf input,.hcf select,.hcf textarea{background:rgba(255,255,255,.13);border:1.5px solid rgba(255,255,255,.30)}
+.hnav-btn{background:rgba(255,255,255,.13);border:1.5px solid rgba(255,255,255,.30)}
+
+/* the long slide-one headline needs a touch less scale than the short ones */
+.hero .slide[data-slide="0"] .hero-h{font-size:clamp(2.15rem,4.5vw,3.5rem);letter-spacing:-.03em}
+.hero .hero-h .nb{white-space:nowrap}
