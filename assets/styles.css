@@ -1311,3 +1311,37 @@ a.svc-link{cursor:pointer}
   .wx-icon{width:72px;height:72px}
   .wx-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ==========================================================================
+   Compact weather strip (replaces the full panel in the hero)
+   ========================================================================== */
+.wxbar{
+  display:inline-flex;align-items:center;gap:11px;
+  padding:7px 14px 7px 9px;border-radius:999px;margin-bottom:26px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(8px);max-width:100%;
+}
+.wxbar-ico{width:26px;height:26px;flex:none;opacity:.95;display:block}
+.wxbar-ico svg{width:100%;height:100%;display:block}
+.wxbar-t{
+  font-size:.845rem;font-weight:600;color:rgba(255,255,255,.72);
+  letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.wxbar-t b{color:#fff;font-weight:800;margin-right:5px}
+.wxbar-t #wxTemp,.wxbar-t #wxHum{color:#fff;font-weight:800;font-variant-numeric:tabular-nums}
+.wxbar-t #wxCond{color:var(--sand-lt);font-weight:700}
+.wxbar-badge{
+  display:inline-flex;align-items:center;gap:5px;flex:none;
+  font-size:.6rem;font-weight:800;letter-spacing:.09em;color:#4ADE80;
+  padding-left:11px;border-left:1px solid rgba(255,255,255,.14);
+}
+.wxbar-badge .pulse-dot{width:5px;height:5px}
+.wxbar-badge.is-snap{color:rgba(255,255,255,.5)}
+.wxbar-badge.is-snap .pulse-dot{background:rgba(255,255,255,.35);animation:none;box-shadow:none}
+
+@media (max-width:640px){
+  .wxbar{gap:9px;padding:6px 12px 6px 8px;margin-bottom:20px}
+  .wxbar-t{font-size:.78rem;white-space:normal}
+  .wxbar-ico{width:22px;height:22px}
+  .wxbar-badge{display:none}
+}

@@ -146,6 +146,7 @@
   };
   wireForm('#heroForm', '#heroFormWrap', '#heroSuccess', '#heroTimer', 0.8);
   wireForm('#mainForm', '#mainFormWrap', '#mainSuccess', '#mainTimer', 1.1);
+  wireForm('#hForm', '#hFormWrap', '#hSuccess', '#hTimer', 0.9);
 
   /* ---------- missed-call SMS animation ------------------------------------ */
   var smsBody = $('#smsBody');
@@ -391,23 +392,45 @@
       return { score: score, label: label };
     };
 
+    /* every field is optional -- the panel may be compact or full */
+    var put = function (id, val, asHtml) {
+      var el = $(id);
+      if (!el) return;
+      if (asHtml) el.innerHTML = val; else el.textContent = val;
+    };
+
     var paint = function (c, daily) {
-      var code = WMO[c.weather_code] || ['—', 'cloud'];
-      $('#wxTemp').textContent = Math.round(c.temperature_2m);
-      $('#wxCond').textContent = code[0];
-      $('#wxFeels').innerHTML = Math.round(c.apparent_temperature) + '&deg;';
-      $('#wxHum').textContent = Math.round(c.relative_humidity_2m) + '%';
-      $('#wxWind').textContent = Math.round(c.wind_speed_10m) + ' mph';
-      $('#wxIcon').innerHTML = ART[code[1]] || ART.cloud;
-      if (daily) {
-        $('#wxHigh').innerHTML = Math.round(daily.temperature_2m_max[0]) + '&deg;';
-        $('#wxLow').innerHTML = Math.round(daily.temperature_2m_min[0]) + '&deg;';
+      var code = WMO[c.weather_code] || ['\u2014', 'cloud'];
+      var t = new Date();
+      var time = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      put('#wxTemp', Math.round(c.temperature_2m));
+      put('#wxCond', code[0]);
+      put('#wxFeels', Math.round(c.apparent_temperature) + '&deg;', true);
+      put('#wxHum', Math.round(c.relative_humidity_2m) + '%');
+      put('#wxWind', Math.round(c.wind_speed_10m) + ' mph');
+      put('#wxIcon', ART[code[1]] || ART.cloud, true);
+      if (daily && daily.temperature_2m_max) {
+        put('#wxHigh', Math.round(daily.temperature_2m_max[0]) + '&deg;', true);
+        put('#wxLow', Math.round(daily.temperature_2m_min[0]) + '&deg;', true);
       }
       var d = demand(c.temperature_2m, c.relative_humidity_2m);
-      $('#wxLoadT').textContent = d.label;
-      $('#wxLoadBar').style.width = d.score + '%';
-      var t = new Date();
-      $('#wxTime').textContent = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      put('#wxLoadT', d.label);
+      var bar = $('#wxLoadBar');
+      if (bar) bar.style.width = d.score + '%';
+      put('#wxTime', time);
+
+      /* the compact strip hides the detail -- keep it in the tooltip */
+      if (wx) {
+        wx.setAttribute('title',
+          'Carlsbad, CA \u00b7 ' + Math.round(c.temperature_2m) + '\u00b0F, feels like '
+          + Math.round(c.apparent_temperature) + '\u00b0'
+          + (daily && daily.temperature_2m_max
+              ? ' \u00b7 high ' + Math.round(daily.temperature_2m_max[0]) + '\u00b0 / low ' + Math.round(daily.temperature_2m_min[0]) + '\u00b0'
+              : '')
+          + ' \u00b7 wind ' + Math.round(c.wind_speed_10m) + ' mph'
+          + ' \u00b7 cooling demand ' + d.label.toLowerCase()
+          + ' \u00b7 updated ' + time);
+      }
     };
 
     var load = function () {
